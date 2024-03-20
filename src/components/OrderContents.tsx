@@ -3,9 +3,10 @@ import { OrderItem } from "../types"
 
 type OrderContentsProps = {
   order: OrderItem[]
+  removeItem: (id: OrderItem["id"]) => void
 }
 
-const OrderContents = ({ order } : OrderContentsProps) => {
+const OrderContents = ({ order, removeItem } : OrderContentsProps) => {
 
   return (
     <div>
@@ -29,6 +30,7 @@ const OrderContents = ({ order } : OrderContentsProps) => {
                   <button
                     type="button"
                     className="bg-red-600 rounded-full h-8 w-8 text-white font-black"
+                    onClick={() => removeItem(item.id)}
                   >
                     X
                   </button>

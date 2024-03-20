@@ -6,7 +6,7 @@ import useOrder from "./hooks/useOrder"
 
 function App() {
 
-  const { order, addItem } = useOrder()
+  const { order, addItem, removeItem } = useOrder()
 
   return (
     <>
@@ -19,7 +19,7 @@ function App() {
           <h2 className="mb-5 text-5xl font-bold">Menú</h2>
           {
             menuItems.map(item => (
-              <MenuItem 
+              <MenuItem
                 key={item.id}
                 item={item}
                 addItem={addItem}
@@ -29,8 +29,9 @@ function App() {
         </div>
 
         <div className="border-2 border-slate-300 rounded-md p-5 md:overflow-y-scroll md:h-screen space-y-10">
-          <OrderContents 
+          <OrderContents
             order={order}
+            removeItem={removeItem}
           />
         </div>
       </main>
