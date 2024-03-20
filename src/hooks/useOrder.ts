@@ -5,8 +5,13 @@ const useOrder = () => {
 
   const [order, setOrder] = useState<OrderItem[]>([])
 
-  return {
+  const addItem = () => {  
+    console.log("agregando...");
+    
+  }
 
+  return {
+    addItem
   }
 }
 
