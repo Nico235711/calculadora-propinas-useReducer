@@ -6,11 +6,6 @@ const useOrder = () => {
   const [order, setOrder] = useState<OrderItem[]>([])
   const [tip, setTip] = useState(0)
 
-  const removeItem = (id: OrderItem["id"]) => {
-
-    const updatedOrder = order.filter(orderItem => orderItem.id !== id)
-    setOrder(updatedOrder)
-  }
 
   const placeOrder = () => { 
     setOrder([])
@@ -21,7 +16,6 @@ const useOrder = () => {
     order,
     tip,
     setTip,
-    removeItem,
     placeOrder
   }
 }
