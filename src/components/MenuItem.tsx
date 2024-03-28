@@ -1,8 +1,8 @@
-import { MenuItems } from "../types"
+import { MenuItem } from "../types"
 
 type MenuItemProps = {
-  item: MenuItems
-  addItem: (item: MenuItems) => void
+  item: MenuItem
+  addItem: (item: MenuItem) => void
 }
 
 const MenuItem = ({ item, addItem } : MenuItemProps) => {

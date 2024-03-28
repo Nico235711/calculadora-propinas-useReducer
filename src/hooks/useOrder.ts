@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { MenuItems, OrderItem } from "../types"
+import { MenuItem, OrderItem } from "../types"
 
 const useOrder = () => {
 
   const [order, setOrder] = useState<OrderItem[]>([])
   const [tip, setTip] = useState(0)
 
-  const addItem = (item: MenuItems) => {
+  const addItem = (item: MenuItem) => {
 
     const itemExists = order.find(orderItem => orderItem.id === item.id)
 
