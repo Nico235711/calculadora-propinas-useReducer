@@ -35,10 +35,10 @@ function App() {
 
         <div className="border-2 border-slate-300 rounded-md p-5 md:overflow-y-scroll md:h-screen space-y-10">
           {
-            order.length ? (
+            state.order.length ? (
               <>
                 <OrderContents
-                  order={order}
+                  order={state.order}
                   removeItem={removeItem}
                 />
                 
@@ -48,7 +48,7 @@ function App() {
                 />
                 
                 <OrderTotals 
-                  order={order}
+                  order={state.order}
                   tip={tip}
                   placeOrder={placeOrder}
                 />
