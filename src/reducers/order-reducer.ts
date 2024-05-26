@@ -23,53 +23,47 @@ export const orderReducer = (
     state: OrderState = initialState,
     action: OrderActions
   ) => {
-    if (action.type === "add-item") {
-      const itemExists = state.order.find(orderItem => orderItem.id === action.payload.item.id)
-      let updatedOrder : OrderItem[] = []
-
-    if (itemExists) { // si existe en mi orden
-      updatedOrder = state.order.map(orderItem => (
-        orderItem.id === action.payload.item.id ?
-          { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem
-      ))
-
-    } else { // no existe en mi orden
-      // no puedo agregar a order el item porque el item no tiene la propiedad
-      // quantity asi que creo un nuevo item tomando una copia de las propiedades
-      // del item anterior pero con la propiedad nueva
-      const newItem : OrderItem = { ...action.payload.item, quantity: 1 }
-      updatedOrder = [...state.order, newItem]
+    switch (action.type) {
+      case "add-item":
+        const itemExists = state.order.find(orderItem => orderItem.id === action.payload.item.id);
+        let updatedOrder = [];
+  
+        if (itemExists) { // Si el item ya existe en la orden
+          updatedOrder = state.order.map(orderItem => (
+            orderItem.id === action.payload.item.id ?
+              { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem
+          ));
+        } else { // Si el item no existe en la orden
+          const newItem = { ...action.payload.item, quantity: 1 };
+          updatedOrder = [...state.order, newItem];
+        }
+  
+        return {
+          ...state,
+          order: updatedOrder
+        };
+  
+      case "remove-item":
+        const updatedOrderRemove = state.order.filter(orderItem => orderItem.id !== action.payload.id);
+  
+        return {
+          ...state,
+          order: updatedOrderRemove
+        };
+  
+      case "place-order":
+        return {
+          order: [],
+          tip: 0
+        };
+  
+      case "add-tip":
+        return {
+          ...state,
+          tip: action.payload.value
+        };
+  
+      default:
+        return state;
     }
-      return {
-        ...state,
-        order: updatedOrder
-      }
-    }
-
-    if (action.type === "remove-item") {
-      const updatedOrder = state.order.filter(orderItem => orderItem.id !== action.payload.id)
-
-      return {
-        ...state,
-        order: updatedOrder
-      }
-    }
-
-    if (action.type === "place-order") {
-      
-      return {
-        order: [],
-        tip: 0
-      }
-    }
-
-    if (action.type === "add-tip") {
-
-      return {
-        ...state,
-        tip: action.payload.value
-      }
-    }
-
-    return state
 }
